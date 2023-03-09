@@ -2,48 +2,45 @@ package co.edu.uptc.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainPanel extends JPanel {
+    private ActionListener actionListener;
     private JButton personButton;
     private JButton billButton;
     private JButton productButton;
-    private JLabel titleLabel;
+    private MainPanelContent contentPanel;
 
-    public MainPanel() {
+    public MainPanel(ActionListener actionListener) {
+        this.actionListener = actionListener;
         setLayout(new GridBagLayout());
         setBackground(new Color(180, 180, 180));
         initComponents();
+        setVisible(true);
     }
 
     private void initComponents() {
         personButton = new MainOptionButton("PERSONAS");
+        personButton.addActionListener(actionListener);
         billButton = new MainOptionButton("FACTURAS");
+        billButton.addActionListener(actionListener);
         productButton = new MainOptionButton("PRODUCTOS");
-        titleLabel = new JLabel("<html><center>S I S T E M A <br/> D E <br/> FACTURACI\u00d3N</center></html>");
+        productButton.addActionListener(actionListener);
+        contentPanel = new MainPanelContent();
 
-        setLabelFeatures();
-
-        addTitleLabel();
+        addMainContentPanel();
         addPersonButton();
         addBillButton();
         addProductButton();
     }
 
-    private void setLabelFeatures() {
-        titleLabel.setMinimumSize(new Dimension(850,422));
-        titleLabel.setMaximumSize(new Dimension(850,422));
-        titleLabel.setPreferredSize(new Dimension(850,422));
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.PLAIN, 80));
-    }
-
-    private void addTitleLabel() {
+    private void addMainContentPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 3;
         constraints.gridheight = 1;
-        add(titleLabel, constraints);
+        add(contentPanel, constraints);
     }
 
     private void addPersonButton() {
@@ -68,5 +65,19 @@ public class MainPanel extends JPanel {
         constraints.gridy = 0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         add(billButton, constraints);
+
     }
+
+    public JButton getBillButton() {
+        return billButton;
+    }
+
+    public JButton getPersonButton() {
+        return personButton;
+    }
+
+    public JButton getProductButton() {
+        return productButton;
+    }
+
 }
