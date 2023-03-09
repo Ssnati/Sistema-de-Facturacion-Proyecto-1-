@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="UptcLibrary">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/library/UptcLibrary.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
