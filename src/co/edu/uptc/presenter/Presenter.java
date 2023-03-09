@@ -1,8 +1,6 @@
 package co.edu.uptc.presenter;
 
 import co.edu.uptc.pojo.CashRegister;
-import co.edu.uptc.pojo.Person;
-import co.edu.uptc.view.ConsoleView;
 import co.edu.uptc.view.View;
 
 import java.awt.event.ActionEvent;
