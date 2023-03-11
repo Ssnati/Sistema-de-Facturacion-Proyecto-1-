@@ -41,7 +41,7 @@ public class View extends JFrame implements ActionListener {
         repaint();
     }
 
-    private void showPersonPanel() {
+    public void showPersonPanel() {
         mainPanel.showPersonPanel();
         repaint();
     }

@@ -72,6 +72,7 @@ public class Presenter {
     public static void main(String[] args) {
         Presenter presenter = new Presenter();
         presenter.start();
+        presenter.view.showPersonPanel();
     }
 
 }
