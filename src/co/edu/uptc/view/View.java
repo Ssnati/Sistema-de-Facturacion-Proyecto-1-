@@ -1,20 +1,13 @@
 package co.edu.uptc.view;
 
-import co.edu.uptc.view.bill.BillPanel;
-import co.edu.uptc.view.person.PersonPanel;
-import co.edu.uptc.view.product.ProductPanel;
+import co.edu.uptc.presenter.Presenter;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class View extends JFrame implements ActionListener {
     private MainPanel mainPanel;
-    private PersonPanel personPanel;
-    private BillPanel billPanel;
-    private ProductPanel productPanel;
-    private MainPanelContent mainPanelContent;
 
     public View() {
         super("Facturación");
@@ -22,35 +15,41 @@ public class View extends JFrame implements ActionListener {
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible(true);
+        setVisible(false);
     }
 
     private void initComponents() {
         mainPanel = new MainPanel(this);
         add(mainPanel);
-        mainPanelContent = new MainPanelContent();
-        personPanel = new PersonPanel(this);
-//        billPanel = new BillPanel(this);
-//        productPanel = new ProductPanel(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("Action performed");
         if (e.getSource() == mainPanel.getPersonButton()) showPersonPanel();
         else if (e.getSource() == mainPanel.getBillButton()) showBillPanel();
         else if (e.getSource() == mainPanel.getProductButton()) showProductPanel();
     }
 
     private void showProductPanel() {
+        mainPanel.showProductPanel();
+        repaint();
     }
 
     private void showBillPanel() {
+     mainPanel.showBillPanel();
+        repaint();
     }
 
     private void showPersonPanel() {
-        mainPanelContent.setVisible(false);
-        getContentPane().add(personPanel, BorderLayout.CENTER);
-        mainPanel.getPersonButton().setBackground(new Color(97, 113, 255));
+        mainPanel.showPersonPanel();
         repaint();
+    }
+
+    public void setPresenter(Presenter presenter) {
+    }
+
+    public void start() {
+        setVisible(true);
     }
 }

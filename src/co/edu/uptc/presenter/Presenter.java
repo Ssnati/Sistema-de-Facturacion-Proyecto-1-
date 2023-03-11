@@ -3,13 +3,9 @@ package co.edu.uptc.presenter;
 import co.edu.uptc.pojo.CashRegister;
 import co.edu.uptc.view.View;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class Presenter implements ActionListener {
-    private View view;
-    private CashRegister cashRegister;
-
+public class Presenter {
+    private final View view;
+    private final CashRegister cashRegister;
     public Presenter() {
         view = new View();
         cashRegister = new CashRegister();
@@ -68,38 +64,9 @@ public class Presenter implements ActionListener {
     }
 
     public void start(){
-    }
-
-    private void personMenu() {
-//        switch (view.read("Seleccione una opción: \nAgregar: 1\nEliminar: 2\nListar: 3\nBuscar: 4\nRegresar: 5")) {
-//            case "1" -> {
-//                if (addNewPerson()) {
-//                    view.show("Persona agregada con éxito");
-//                } else {
-//                    view.show("No se pudo agregar la persona");
-//                }
-//            }
-//            case "2" -> cashRegister.removePerson(view.read("Ingrese el nombre de la persona: "));
-//            case "3" -> view.show(cashRegister.listPersons());
-//            case "4" ->
-//                    view.show(String.valueOf(cashRegister.findPerson(view.read("Ingrese el nombre de la persona: "))));
-//            case "5" -> start();
-//            default -> view.show("Opción no válida");
-//        }
-    }
-
-//    private boolean addNewPerson() {
-//        return cashRegister.addPerson(view.read("Ingrese el tipo de documento: C.C., C.E., T.I., Pasaporte"),
-//                view.read("Ingrese el número de documento: "),
-//                view.read("Ingrese el nombre de la persona: "),
-//                view.read("Ingrese el apellido de la persona: "));
-//    }
-
-    private void productMenu() {
-    }
-
-    private void billMenu() {
-
+        loadDefaultData();
+        view.setPresenter(this);
+        view.start();
     }
 
     public static void main(String[] args) {
@@ -107,8 +74,4 @@ public class Presenter implements ActionListener {
         presenter.start();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }
