@@ -3,17 +3,17 @@ package co.edu.uptc.pojo;
 import java.util.Date;
 
 public class BillHeader {
-    private int id;
+    private String id;
     private String date;
     private Person person;
 
-    public BillHeader(int id, Person person) {
+    public BillHeader(String id, Person person) {
         date = String.valueOf(new Date());
         this.id = id;
         this.person = person;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -23,5 +23,14 @@ public class BillHeader {
 
     public String getDate() {
         return date;
+    }
+
+    @Override
+    public String toString() {
+        return "BillHeader{" +
+                "id='" + id + '\'' +
+                ", date='" + date + '\'' +
+                ", person=" + person +
+                '}';
     }
 }

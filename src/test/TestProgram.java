@@ -1,8 +1,11 @@
 package test;
 
+import co.edu.uptc.model.dinamic.UptcList;
 import co.edu.uptc.pojo.*;
 import co.edu.uptc.presenter.Presenter;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -49,13 +52,32 @@ public class TestProgram {
     }
 
     private void addBill(Presenter presenter) {
-        Bill bill = new Bill(1, presenter.getCashRegister().getPersons().get(0));
+        Bill bill = new Bill(presenter.getCashRegister().generateBillNumber(), presenter.getCashRegister().getPersons().get(0));
         bill.addProduct(presenter.getCashRegister().getProducts().get(0), 7);
-        presenter.getCashRegister().addBill(bill);
+        bill.addProduct(presenter.getCashRegister().getProducts().get(1), 3);
+        bill.addProduct(presenter.getCashRegister().getProducts().get(2), 2);
+        bill.addProduct(presenter.getCashRegister().getProducts().get(3), 1);
+        assertTrue(presenter.getCashRegister().addBill(bill));
+
+        bill = new Bill(presenter.getCashRegister().generateBillNumber(), presenter.getCashRegister().getPersons().get(1));
+        bill.addProduct(presenter.getCashRegister().getProducts().get(0), 2);
+        bill.addProduct(presenter.getCashRegister().getProducts().get(1), 1);
+        assertTrue(presenter.getCashRegister().addBill(bill));
+        assertFalse(presenter.getCashRegister().addBill(bill));
+
+        assertEquals(2, presenter.getCashRegister().getBills().size());
+    }
+
+    private void printBills(CashRegister cashRegister) {
+        System.out.println("Bills:");
+        for (Bill bill : cashRegister.getBills()) {
+            System.out.println("[" + bill.toString() + "]->");
+        }
+        System.out.println();
     }
 
     @Test
-    public void TestEditPersons() throws Exception {
+    public void TestEditPersons() {
         Presenter presenter = new Presenter();
 
         addPersons(presenter);
@@ -145,7 +167,7 @@ public class TestProgram {
     }
 
     @Test
-    public void TestEditProduct() throws Exception {
+    public void TestEditProduct() {
         Presenter presenter = new Presenter();
 
         addPersons(presenter);
@@ -161,9 +183,67 @@ public class TestProgram {
 
         presenter.getCashRegister().editProduct(product1.getBarCode(), product1.getCIU(), new Product("Coca Cola 70L", EAN13Generator.generateBarcode(MANUFACTURER_NUMBER+1, product1.getCIU()), product1.getCIU(),
                 19000));
-        assertNotEquals(product1, presenter.getCashRegister().getProducts().get(1));
+
+        assertEquals(product1, presenter.getCashRegister().getProducts().get(1));
 
         System.out.println("TestEditProduct: ");
         printProducts(presenter.getCashRegister());
+    }
+
+    @Test
+    public void TestAddBill() {
+        Presenter presenter = new Presenter();
+        addPersons(presenter);
+        addProducts(presenter);
+        addBill(presenter);
+
+        assertEquals(2, presenter.getCashRegister().getBills().size());
+        System.out.println("TestAddBill: ");
+        printBills(presenter.getCashRegister());
+    }
+
+    @Test
+    public void TestRemoveBill() {
+        Presenter presenter = new Presenter();
+        addPersons(presenter);
+        addProducts(presenter);
+        addBill(presenter);
+
+        Bill bill = presenter.getCashRegister().getBills().get(0);
+        assertTrue(presenter.getCashRegister().removeBill(bill.getBillHeader().getId()));
+        assertFalse(presenter.getCashRegister().removeBill(bill.getBillHeader().getId()));
+
+        assertEquals(2, presenter.getCashRegister().getBills().size());
+        System.out.println("TestRemoveBill: ");
+        printBills(presenter.getCashRegister());
+    }
+
+    @Test
+    public void TestEditBill() {
+        Presenter presenter = new Presenter();
+        addPersons(presenter);
+        addProducts(presenter);
+        addBill(presenter);
+
+        Bill bill = presenter.getCashRegister().getBills().get(0);
+        Bill bill1 = presenter.getCashRegister().getBills().get(1);
+
+        List<Product> productList = newListOfProducts(presenter);
+        presenter.getCashRegister().editBill(bill.getBillHeader().getId(), productList);
+        assertEquals(bill, presenter.getCashRegister().getBills().get(0));
+
+        presenter.getCashRegister().editBill(bill1.getBillHeader().getId(), productList);
+        assertEquals(bill1, presenter.getCashRegister().getBills().get(1));
+
+        System.out.println("TestEditBill: ");
+        printBills(presenter.getCashRegister());
+    }
+
+    private List<Product> newListOfProducts(Presenter presenter) {
+        List<Product> productList = new UptcList<>();
+        for (int i = 0; i < 5; i++) {
+            productList.add(presenter.getCashRegister().getProducts().get(i));
+        }
+        return productList;
     }
 }

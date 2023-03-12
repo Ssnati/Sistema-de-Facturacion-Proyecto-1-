@@ -5,8 +5,14 @@ public class Bill {
     private BillBody billBody;
     private BillFooter billFooter;
 
-    public Bill(int billId, Person person) {
+    public Bill(String billId, Person person) {
         billHeader = new BillHeader(billId, person);
+        billBody = new BillBody();
+        billFooter = new BillFooter();
+    }
+
+    public Bill(String billId) {
+        billHeader = new BillHeader(billId,null);
         billBody = new BillBody();
         billFooter = new BillFooter();
     }
@@ -26,5 +32,14 @@ public class Bill {
     public void addProduct(Product product, int quantity) {
         billBody.addProduct(product, quantity);
         billFooter.addProduct(product, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "billHeader=" + billHeader.toString() +
+                ", billBody=" + billBody.toString() +
+                ", billFooter=" + billFooter.toString() +
+                '}';
     }
 }

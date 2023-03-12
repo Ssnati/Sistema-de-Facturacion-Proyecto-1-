@@ -2,22 +2,32 @@ package co.edu.uptc.pojo;
 
 import co.edu.uptc.model.dinamic.UptcList;
 
+import java.util.List;
+
 public class BillBody {
-    private int itemNumber;
-    private UptcList<Product> productList;
+    private List<Product> productList;
 
     public BillBody() {
         productList = new UptcList<>();
-        itemNumber = 0;
     }
 
     public UptcList<Product> getProductList() {
-        return productList;
+        return (UptcList<Product>) productList;
     }
 
     public void addProduct(Product product, int quantity) {
-        itemNumber++;
         for (int i = 0; i < quantity; i++)
             productList.add(product);
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    @Override
+    public String toString() {
+        return "BillBody{" +
+                "productList=" + productList.toString() +
+                '}';
     }
 }

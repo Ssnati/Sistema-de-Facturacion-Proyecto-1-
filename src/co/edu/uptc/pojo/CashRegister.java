@@ -2,6 +2,8 @@ package co.edu.uptc.pojo;
 
 import co.edu.uptc.model.dinamic.UptcList;
 
+import java.util.List;
+
 public class CashRegister {
     private UptcList<Person> persons;
     private UptcList<Product> products;
@@ -37,7 +39,7 @@ public class CashRegister {
         }
     }
 
-    public void editPerson(String documentType, String document, Person newPerson)  {
+    public void editPerson(String documentType, String document, Person newPerson) {
         boolean flag = false;
         try {
             checkPersonInBills(searchPerson(documentType, document));
@@ -76,16 +78,17 @@ public class CashRegister {
         return null;
     }
 
-    public Person findPerson(String character) {
+    public List<Person> searchAllPersons(String character) {
+        UptcList<Person> list = new UptcList<>();
         for (Person person : persons) {
             if (person.getDocumentType().equals(character) ||
                     person.getName().equals(character) ||
                     person.getAddress().equals(character) ||
                     person.getCity().equals(character) ||
                     person.getLastName().equals(character) ||
-                    person.getDocumentNumber().equals(character)) return person;
+                    person.getDocumentNumber().equals(character)) list.add(person);
         }
-        return null;
+        return list;
     }
 
     public boolean addProduct(Product product) {
@@ -138,29 +141,88 @@ public class CashRegister {
         }
     }
 
-    private Product searchProduct(String barCode, String ciu) {
+    public Product searchProduct(String barCode, String ciu) {
         for (Product product : products) {
             if (product.getBarCode().equals(barCode) || product.getCIU().equals(ciu)) return product;
         }
         return null;
     }
 
-    public Product findProduct(String character) {
+    public List<Product> searchAllProducts(String character) {
+        List<Product> list = new UptcList<>();
         for (Product product : products) {
             if (product.getName().equals(character) ||
                     product.getBarCode().equals(character) ||
                     product.getCIU().equals(character) ||
-                    String.valueOf(product.getPrice()).equals(character)) return product;
+                    String.valueOf(product.getPrice()).equals(character)) list.add(product);
         }
-        return null;
+        return list;
     }
 
     public void addProductToBill(String cocaCola, int i, String juan) {
 
     }
 
-    public void addBill(Bill bill) {
-        bills.add(bill);
+    public boolean addBill(Bill bill) {
+        if (searchBill(bill.getBillHeader().getId()) == null) return bills.add(bill);
+        return false;
+    }
+
+    public boolean removeBill(String id) {
+        if (searchBill(id).getBillHeader().getPerson() != null && searchBill(id).getBillBody().getProductList().size() != 0)
+            return bills.set(bills.indexOf(searchBill(id)), new Bill(id)) != null;
+        return false;
+    }
+
+    public void editBill(String id, List<Product> products) {
+        if (searchBill(id) != null) searchBill(id).getBillBody().setProductList(products);
+    }
+
+    public Bill searchBill(String id) {
+        for (Bill bill : bills) {
+            if (bill.getBillHeader().getId().equals(id)) {
+                return bill;
+            }
+        }
+        return null;
+    }
+
+    public List<Bill> searchAllBills(String character) {//pendiente por buscar alguna forma de hacerlo
+        List<Bill> list = new UptcList<>();
+        for (Bill bill : bills) {
+            searchPersonForBill(list, character, bill);
+            searchProductForBill(list, character, bill);
+            if (bill.getBillHeader().getId().equals(character) ||
+                    bill.getBillHeader().getDate().equals(character) ||
+                    String.valueOf(bill.getBillFooter().getTotalWithIva()).equals(character)) list.add(bill);
+        }
+        return list;
+    }
+
+    private void searchProductForBill(List<Bill> list, String character, Bill bill) {
+        for (Product product : bill.getBillBody().getProductList()) {
+            if (product.getName().equals(character) ||
+                    product.getBarCode().equals(character) ||
+                    product.getCIU().equals(character) ||
+                    String.valueOf(product.getPrice()).equals(character)) list.add(bill);
+        }
+    }
+
+    private void searchPersonForBill(List<Bill> list, String character, Bill bill) {
+        if (bill.getBillHeader().getPerson().getDocumentType().equals(character) ||
+                bill.getBillHeader().getPerson().getDocumentNumber().equals(character) ||
+                bill.getBillHeader().getPerson().getName().equals(character) ||
+                bill.getBillHeader().getPerson().getLastName().equals(character) ||
+                bill.getBillHeader().getPerson().getAddress().equals(character) ||
+                bill.getBillHeader().getPerson().getCity().equals(character)) list.add(bill);
+    }
+
+    public String generateBillNumber() {
+        StringBuilder builder = new StringBuilder(String.valueOf(bills.size() + 1));
+        for (int i = 0; i < 5 - builder.length(); i++) {
+            builder.insert(0, "0");
+        }
+        return builder.toString();
     }
 
     public UptcList<Person> getPersons() {
