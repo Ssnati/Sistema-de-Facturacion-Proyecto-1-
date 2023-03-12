@@ -1,5 +1,6 @@
 package co.edu.uptc.presenter;
 
+import co.edu.uptc.model.CashRegister;
 import co.edu.uptc.pojo.*;
 import co.edu.uptc.view.View;
 
@@ -124,12 +125,30 @@ public class Presenter {
                     1000));
         }
         {
-            cashRegister.addProductToBill("Coca Cola", 1, "Juan");
-            cashRegister.addProductToBill("Pepsi", 1, "Juan");
-            cashRegister.addProductToBill("Sprite", 1, "Juan");
-            cashRegister.addProductToBill("Fanta", 1, "Juan");
-            cashRegister.addProductToBill("Agua", 1, "Juan");
-            cashRegister.addProductToBill("Pan", 1, "Juan");
+            Bill bill = new Bill(cashRegister.generateBillNumber(), cashRegister.getPersons().get(0));
+            bill.addProduct(cashRegister.getProducts().get(0), 2);
+            bill.addProduct(cashRegister.getProducts().get(10), 1);
+            bill.addProduct(cashRegister.getProducts().get(7), 5);
+            cashRegister.addBill(bill);
+
+            Bill bill1 = new Bill(cashRegister.generateBillNumber(), cashRegister.getPersons().get(2));
+            bill1.addProduct(cashRegister.getProducts().get(1), 3);
+            bill1.addProduct(cashRegister.getProducts().get(9), 1);
+            bill1.addProduct(cashRegister.getProducts().get(5), 2);
+            cashRegister.addBill(bill1);
+
+            Bill bill2 = new Bill(cashRegister.generateBillNumber(), cashRegister.getPersons().get(1));
+            bill2.addProduct(cashRegister.getProducts().get(11), 1);
+            bill2.addProduct(cashRegister.getProducts().get(6), 4);
+            bill2.addProduct(cashRegister.getProducts().get(3), 2);
+            cashRegister.addBill(bill2);
+
+            Bill bill3 = new Bill(cashRegister.generateBillNumber(), cashRegister.getPersons().get(0));
+            bill3.addProduct(cashRegister.getProducts().get(8), 1);
+            bill3.addProduct(cashRegister.getProducts().get(4), 3);
+            bill3.addProduct(cashRegister.getProducts().get(12), 5);
+            cashRegister.addBill(bill3);
+
         }
     }
 
@@ -140,13 +159,11 @@ public class Presenter {
     }
 
     public static void main(String[] args) {
+//        Esto prueba el panel de personas
         Presenter presenter = new Presenter();
-        /*presenter.start();
+        presenter.start();
         presenter.view.showPersonPanel();
-        Esto prueba el panel de personas*/
-        presenter.loadDefaultData();
-        presenter.cashRegister.addPerson(new Person("C.E.", "159357486", "Felipe", "Alvarez"));
-        presenter.cashRegister.addPerson(new Person("C.E.", "159357486", "Felipe", "Alvarez"));
+
     }
 
     public CashRegister getCashRegister() {

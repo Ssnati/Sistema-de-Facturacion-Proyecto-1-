@@ -1,6 +1,9 @@
-package co.edu.uptc.pojo;
+package co.edu.uptc.model;
 
 import co.edu.uptc.model.dinamic.UptcList;
+import co.edu.uptc.pojo.Bill;
+import co.edu.uptc.pojo.Person;
+import co.edu.uptc.pojo.Product;
 
 import java.util.List;
 
@@ -157,10 +160,6 @@ public class CashRegister {
                     String.valueOf(product.getPrice()).equals(character)) list.add(product);
         }
         return list;
-    }
-
-    public void addProductToBill(String cocaCola, int i, String juan) {
-
     }
 
     public boolean addBill(Bill bill) {

@@ -1,5 +1,6 @@
 package test;
 
+import co.edu.uptc.model.CashRegister;
 import co.edu.uptc.model.dinamic.UptcList;
 import co.edu.uptc.pojo.*;
 import co.edu.uptc.presenter.Presenter;

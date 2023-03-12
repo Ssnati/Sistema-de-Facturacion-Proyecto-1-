@@ -11,8 +11,8 @@ public class Bill {
         billFooter = new BillFooter();
     }
 
-    public Bill(String billId) {
-        billHeader = new BillHeader(billId,null);
+    public Bill(String idBill) {
+        billHeader = new BillHeader(idBill,null);
         billBody = new BillBody();
         billFooter = new BillFooter();
     }
