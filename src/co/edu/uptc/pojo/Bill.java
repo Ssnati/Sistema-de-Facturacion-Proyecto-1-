@@ -22,4 +22,9 @@ public class Bill {
     public BillFooter getBillFooter() {
         return billFooter;
     }
+
+    public void addProduct(Product product, int quantity) {
+        billBody.addProduct(product, quantity);
+        billFooter.addProduct(product, quantity);
+    }
 }
