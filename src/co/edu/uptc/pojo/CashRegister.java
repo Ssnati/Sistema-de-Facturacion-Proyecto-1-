@@ -67,8 +67,8 @@ public class CashRegister {
         return null;
     }
 
-    public void addProduct(String tomates, int i) {
-
+    public void addProduct(Product product) {
+        products.add(product);
     }
 
     public void addProductToBill(String cocaCola, int i, String juan) {

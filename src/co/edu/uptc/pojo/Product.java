@@ -4,14 +4,12 @@ public class Product {
     private String name;
     private String barCode;
     private String CIU;
-    private String description;
     private int price;
 
-    public Product(String name, String barCode, String CIU, String description, int price) {
+    public Product(String name, String barCode, String CIU, int price) {
         this.name = name;
         this.barCode = barCode;
         this.CIU = CIU;
-        this.description = description;
         this.price = price;
     }
 
@@ -37,14 +35,6 @@ public class Product {
 
     public void setCIU(String CIU) {
         this.CIU = CIU;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getPrice() {

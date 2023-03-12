@@ -1,10 +1,11 @@
 package co.edu.uptc.presenter;
 
-import co.edu.uptc.pojo.CashRegister;
-import co.edu.uptc.pojo.Person;
+import co.edu.uptc.pojo.*;
 import co.edu.uptc.view.View;
 
 public class Presenter {
+    private final String MANUFACTURER_NUMBER = "102689356";
+    private final String DEFAULT_CIU = "0000000000000";
     private final View view;
     private final CashRegister cashRegister;
 
@@ -52,28 +53,75 @@ public class Presenter {
             cashRegister.addPerson(new Person("Pasaporte", "3692581478", "Maria", "Martinez"));
         }
         {
-            cashRegister.addProduct("Coca Cola", 1000);
-            cashRegister.addProduct("Pepsi", 1000);
-            cashRegister.addProduct("Sprite", 1000);
-            cashRegister.addProduct("Fanta", 1000);
-            cashRegister.addProduct("Agua", 1000);
-            cashRegister.addProduct("Pan", 1000);
-            cashRegister.addProduct("Leche", 1000);
-            cashRegister.addProduct("Queso", 1000);
-            cashRegister.addProduct("Huevos", 1000);
-            cashRegister.addProduct("Carne", 1000);
-            cashRegister.addProduct("Pollo", 1000);
-            cashRegister.addProduct("Pescado", 1000);
-            cashRegister.addProduct("Arroz", 1000);
-            cashRegister.addProduct("Frijoles", 1000);
-            cashRegister.addProduct("Papas", 1000);
-            cashRegister.addProduct("Yuca", 1000);
-            cashRegister.addProduct("Platanos", 1000);
-            cashRegister.addProduct("Manzanas", 1000);
-            cashRegister.addProduct("Peras", 1000);
-            cashRegister.addProduct("Naranjas", 1000);
-            cashRegister.addProduct("Cebollas", 1000);
-            cashRegister.addProduct("Tomates", 1000);
+            String ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Coca Cola 1.5L", EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Coca Cola 2L",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1200));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Pepsi 1.5L",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Pepsi 2L",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1200));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Fanta 1.5L",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Agua 1.5L",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Pan 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Leche 1L",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Queso 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Huevos 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Carne 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Pollo 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Pescado 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Arroz 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Frijoles 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Papas 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Yuca 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Platanos 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Manzanas 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Peras 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Naranjas 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Cebollas 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
+            ciu = CIUGenerator.generateCIU();
+            cashRegister.addProduct(new Product("Tomates 1Kg",EAN13Generator.generateBarcode(MANUFACTURER_NUMBER, ciu),ciu,
+                    1000));
         }
         {
             cashRegister.addProductToBill("Coca Cola", 1, "Juan");
